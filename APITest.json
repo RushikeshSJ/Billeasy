@@ -1,0 +1,215 @@
+{
+  "info": {
+    "_postman_id": "book-review-api-collection",
+    "name": "📚 Book Review API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🧍‍♂️ User Signup",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Rushikesh\",\n  \"email\": \"rushikesh@example.com\",\n  \"password\": \"123456\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/auth/signup",
+          "host": ["{{base_url}}"],
+          "path": ["api", "auth", "signup"]
+        }
+      }
+    },
+    {
+      "name": "🔑 User Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"rushikesh@example.com\",\n  \"password\": \"123456\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/auth/login",
+          "host": ["{{base_url}}"],
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "➕ Add Book (JWT Required)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Clean Code\",\n  \"author\": \"Robert C. Martin\",\n  \"genre\": \"Programming\",\n  \"description\": \"A Handbook of Agile Software Craftsmanship.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/books",
+          "host": ["{{base_url}}"],
+          "path": ["api", "books"]
+        }
+      }
+    },
+    {
+      "name": "📚 Get All Books",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/books?page=1&author=Robert&genre=Programming",
+          "host": ["{{base_url}}"],
+          "path": ["api", "books"],
+          "query": [
+            { "key": "page", "value": "1" },
+            { "key": "author", "value": "Robert" },
+            { "key": "genre", "value": "Programming" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "📖 Get Book Details by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/books/{{bookId}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "books", "{{bookId}}"]
+        }
+      }
+    },
+    {
+      "name": "📝 Add Review to Book",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"rating\": 5,\n  \"comment\": \"Excellent book for clean coding!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/books/{{bookId}}/reviews",
+          "host": ["{{base_url}}"],
+          "path": ["api", "books", "{{bookId}}", "reviews"]
+        }
+      }
+    },
+    {
+      "name": "✏️ Update Review",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"rating\": 4,\n  \"comment\": \"Updated my rating after second read.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/reviews/{{reviewId}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "reviews", "{{reviewId}}"]
+        }
+      }
+    },
+    {
+      "name": "❌ Delete Review",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/reviews/{{reviewId}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "reviews", "{{reviewId}}"]
+        }
+      }
+    },
+    {
+      "name": "🔍 Search Books by Title/Author",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/books/search?query=clean",
+          "host": ["{{base_url}}"],
+          "path": ["api", "books", "search"],
+          "query": [
+            {
+              "key": "query",
+              "value": "clean"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "bookId",
+      "value": ""
+    },
+    {
+      "key": "reviewId",
+      "value": ""
+    }
+  ]
+}
